@@ -79,3 +79,8 @@ fabric.properties
 venv/
 .idea/
 .env
+
+.idea
+db.sqlite3
+*.pyc
+__pycache__
