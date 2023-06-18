@@ -12,30 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-import environ
-import os
-
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-
-# Set the project base directory
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
-# False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
-
-# Raises Django's ImproperlyConfigured
-# exception if SECRET_KEY not in os.environ
-SECRET_KEY = env('SECRET_KEY')
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -47,12 +25,13 @@ SECRET_KEY = 'django-insecure-=e5%o8#mu(p6_x^tck)5l7lhi!gt2gmi#a4_goyic_x3bb7=8d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'common.apps.CommonConfig',
     'pybo.apps.PyboConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -147,3 +126,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 로그인 성공후 이동하는 URL
+LOGIN_REDIRECT_URL = '/'
+
+# 로그아웃시 이동하는 URL
+LOGOUT_REDIRECT_URL = '/'
